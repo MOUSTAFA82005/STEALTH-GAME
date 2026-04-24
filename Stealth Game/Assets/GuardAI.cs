@@ -27,7 +27,7 @@ public class GuardAI : MonoBehaviour
     public float attackRange = 4f;
     public float attackExitRange = 6f;
     public float attackCooldown = 1.2f;
-    public int damagePerShot = 50;
+    public int damagePerShot = 15;
 
     [Header("Search")]
     public float searchRadius = 4f;

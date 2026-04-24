@@ -8212,7 +8212,7 @@ MonoBehaviour:
   attackRange: 4
   attackExitRange: 6
   attackCooldown: 1.2
-  damagePerShot: 50
+  damagePerShot: 15
   searchRadius: 4
   searchPointCount: 4
   waitAtSearchPoint: 1
@@ -9357,7 +9357,7 @@ MonoBehaviour:
   attackRange: 4
   attackExitRange: 6
   attackCooldown: 1.2
-  damagePerShot: 50
+  damagePerShot: 15
   searchRadius: 4
   searchPointCount: 4
   waitAtSearchPoint: 1
@@ -11559,7 +11559,7 @@ MonoBehaviour:
   attackRange: 4
   attackExitRange: 6
   attackCooldown: 1.2
-  damagePerShot: 50
+  damagePerShot: 15
   searchRadius: 4
   searchPointCount: 4
   waitAtSearchPoint: 1
@@ -11886,7 +11886,7 @@ MonoBehaviour:
   attackRange: 4
   attackExitRange: 6
   attackCooldown: 1.2
-  damagePerShot: 50
+  damagePerShot: 15
   searchRadius: 4
   searchPointCount: 4
   waitAtSearchPoint: 1
@@ -12452,7 +12452,7 @@ MonoBehaviour:
   attackRange: 4
   attackExitRange: 6
   attackCooldown: 1.2
-  damagePerShot: 50
+  damagePerShot: 15
   searchRadius: 4
   searchPointCount: 4
   waitAtSearchPoint: 1
@@ -12627,7 +12627,7 @@ MonoBehaviour:
   attackRange: 4
   attackExitRange: 6
   attackCooldown: 1.2
-  damagePerShot: 50
+  damagePerShot: 15
   searchRadius: 4
   searchPointCount: 4
   waitAtSearchPoint: 1
@@ -13036,7 +13036,7 @@ MonoBehaviour:
   attackRange: 4
   attackExitRange: 6
   attackCooldown: 1.2
-  damagePerShot: 50
+  damagePerShot: 15
   searchRadius: 4
   searchPointCount: 4
   waitAtSearchPoint: 1
@@ -15705,7 +15705,7 @@ MonoBehaviour:
   attackRange: 4
   attackExitRange: 6
   attackCooldown: 1.2
-  damagePerShot: 50
+  damagePerShot: 15
   searchRadius: 4
   searchPointCount: 4
   waitAtSearchPoint: 1
@@ -18177,7 +18177,7 @@ MonoBehaviour:
   attackRange: 4
   attackExitRange: 6
   attackCooldown: 1.2
-  damagePerShot: 50
+  damagePerShot: 15
   searchRadius: 4
   searchPointCount: 4
   waitAtSearchPoint: 1
@@ -21678,7 +21678,7 @@ MonoBehaviour:
   attackRange: 4
   attackExitRange: 6
   attackCooldown: 1.2
-  damagePerShot: 5
+  damagePerShot: 15
   searchRadius: 4
   searchPointCount: 4
   waitAtSearchPoint: 1
@@ -27227,7 +27227,7 @@ MonoBehaviour:
   attackRange: 4
   attackExitRange: 6
   attackCooldown: 1.2
-  damagePerShot: 50
+  damagePerShot: 15
   searchRadius: 4
   searchPointCount: 4
   waitAtSearchPoint: 1
@@ -28737,7 +28737,7 @@ MonoBehaviour:
   attackRange: 4
   attackExitRange: 6
   attackCooldown: 1.2
-  damagePerShot: 50
+  damagePerShot: 15
   searchRadius: 4
   searchPointCount: 4
   waitAtSearchPoint: 1
@@ -29569,7 +29569,7 @@ MonoBehaviour:
   attackRange: 4
   attackExitRange: 6
   attackCooldown: 1.2
-  damagePerShot: 50
+  damagePerShot: 15
   searchRadius: 4
   searchPointCount: 4
   waitAtSearchPoint: 1
@@ -31269,7 +31269,7 @@ MonoBehaviour:
   attackRange: 4
   attackExitRange: 6
   attackCooldown: 1.2
-  damagePerShot: 50
+  damagePerShot: 15
   searchRadius: 4
   searchPointCount: 4
   waitAtSearchPoint: 1
@@ -33386,7 +33386,7 @@ MonoBehaviour:
   attackRange: 4
   attackExitRange: 6
   attackCooldown: 1.2
-  damagePerShot: 50
+  damagePerShot: 15
   searchRadius: 4
   searchPointCount: 4
   waitAtSearchPoint: 1
@@ -34726,7 +34726,7 @@ MonoBehaviour:
   attackRange: 4
   attackExitRange: 6
   attackCooldown: 1.2
-  damagePerShot: 50
+  damagePerShot: 15
   searchRadius: 4
   searchPointCount: 4
   waitAtSearchPoint: 1
@@ -35259,7 +35259,7 @@ MonoBehaviour:
   attackRange: 4
   attackExitRange: 6
   attackCooldown: 1.2
-  damagePerShot: 50
+  damagePerShot: 15
   searchRadius: 4
   searchPointCount: 4
   waitAtSearchPoint: 1
