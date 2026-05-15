@@ -1,55 +1,43 @@
-using UnityEngine;
+using UnityEngine; // Unity framework
 
-public class PlayerMovement : MonoBehaviour
+public class PlayerMovement : MonoBehaviour // Handles player movement
 {
-    public float moveSpeed = 5f;
-    public float rotationSpeed = 10f;
-    public float smoothInputSpeed = 4f;
-    public Animator animator;
+    public float    moveSpeed       = 5f;   // Units/s // Movement speed
+    public float    rotationSpeed   = 10f;  // Slerp factor // Rotation speed
+    public float    smoothInputSpeed = 4f;  // Input lerp // Input smoothing
+    public Animator animator;               // Player animator // Animator reference
 
-    private Rigidbody rb;
-    private Vector3 currentInput;
-    private Vector3 smoothMoveDirection;
+    private Rigidbody rb; // Rigidbody component
+    private Vector3   currentInput;         // Raw WASD // Raw input
+    private Vector3   smoothMoveDirection;  // Lerped direction // Smoothed direction
 
-    void Start()
+    void Start() // Initialize
     {
-        rb = GetComponent<Rigidbody>();
+        rb = GetComponent<Rigidbody>(); // Cache rigidbody
     }
 
-    void Update()
+    void Update() // Per-frame input
     {
-        float moveX = Input.GetAxisRaw("Horizontal");
-        float moveZ = Input.GetAxisRaw("Vertical");
+        // read input // Read player input
+        float moveX = Input.GetAxisRaw("Horizontal"); // Horizontal axis
+        float moveZ = Input.GetAxisRaw("Vertical"); // Vertical axis
+        currentInput = new Vector3(moveX, 0f, moveZ).normalized; // Normalize input
 
-        currentInput = new Vector3(moveX, 0f, moveZ).normalized;
-
-        if (animator != null && animator.runtimeAnimatorController != null)
-        {
-            animator.SetBool("isMoving", currentInput.sqrMagnitude > 0.01f);
-        }
+        // animate // Update animation
+        if (animator != null && animator.runtimeAnimatorController != null) // Has animator
+            animator.SetBool("isMoving", currentInput.sqrMagnitude > 0.01f); // Set moving state
     }
 
-    void FixedUpdate()
+    void FixedUpdate() // Physics update
     {
-        smoothMoveDirection = Vector3.Lerp(
-            smoothMoveDirection,
-            currentInput,
-            smoothInputSpeed * Time.fixedDeltaTime
-        );
+        // smooth // Smooth input
+        smoothMoveDirection = Vector3.Lerp(smoothMoveDirection, currentInput, smoothInputSpeed * Time.fixedDeltaTime); // Interpolate
 
-        Vector3 newPosition = rb.position + smoothMoveDirection * moveSpeed * Time.fixedDeltaTime;
-        rb.MovePosition(newPosition);
+        // move // Move player
+        rb.MovePosition(rb.position + smoothMoveDirection * moveSpeed * Time.fixedDeltaTime); // Apply movement
 
-        if (smoothMoveDirection.sqrMagnitude > 0.001f)
-        {
-            Quaternion targetRotation = Quaternion.LookRotation(smoothMoveDirection);
-            Quaternion smoothRotation = Quaternion.Slerp(
-                rb.rotation,
-                targetRotation,
-                rotationSpeed * Time.fixedDeltaTime
-            );
-
-            rb.MoveRotation(smoothRotation);
-        }
+        // rotate // Rotate player
+        if (smoothMoveDirection.sqrMagnitude > 0.001f) // Has movement
+            rb.MoveRotation(Quaternion.Slerp(rb.rotation, Quaternion.LookRotation(smoothMoveDirection), rotationSpeed * Time.fixedDeltaTime)); // Face direction
     }
 }

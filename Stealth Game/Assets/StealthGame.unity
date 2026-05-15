@@ -8212,11 +8212,17 @@ MonoBehaviour:
   attackRange: 4
   attackExitRange: 6
   attackCooldown: 1.2
+  attackStateMinTime: 1
   damagePerShot: 15
   searchRadius: 4
-  searchPointCount: 4
   waitAtSearchPoint: 1
+  avoidRadius: 0.3
+  detectDistance: 0.8
+  stuckTimeLimit: 1
+  stuckMoveThreshold: 0.05
+  avoidRaySamples: 7
   isDead: 0
+  normalAnimSpeed: 1
 --- !u!54 &450097448
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -9357,11 +9363,17 @@ MonoBehaviour:
   attackRange: 4
   attackExitRange: 6
   attackCooldown: 1.2
+  attackStateMinTime: 1
   damagePerShot: 15
   searchRadius: 4
-  searchPointCount: 4
   waitAtSearchPoint: 1
+  avoidRadius: 0.3
+  detectDistance: 0.8
+  stuckTimeLimit: 1
+  stuckMoveThreshold: 0.05
+  avoidRaySamples: 7
   isDead: 0
+  normalAnimSpeed: 1
 --- !u!54 &496372249
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -11559,11 +11571,17 @@ MonoBehaviour:
   attackRange: 4
   attackExitRange: 6
   attackCooldown: 1.2
+  attackStateMinTime: 1
   damagePerShot: 15
   searchRadius: 4
-  searchPointCount: 4
   waitAtSearchPoint: 1
+  avoidRadius: 0.3
+  detectDistance: 0.8
+  stuckTimeLimit: 1
+  stuckMoveThreshold: 0.05
+  avoidRaySamples: 7
   isDead: 0
+  normalAnimSpeed: 1
 --- !u!54 &595768464
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -11886,11 +11904,17 @@ MonoBehaviour:
   attackRange: 4
   attackExitRange: 6
   attackCooldown: 1.2
+  attackStateMinTime: 1
   damagePerShot: 15
   searchRadius: 4
-  searchPointCount: 4
   waitAtSearchPoint: 1
+  avoidRadius: 0.3
+  detectDistance: 0.8
+  stuckTimeLimit: 1
+  stuckMoveThreshold: 0.05
+  avoidRaySamples: 7
   isDead: 0
+  normalAnimSpeed: 1
 --- !u!54 &600818225
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -12452,11 +12476,17 @@ MonoBehaviour:
   attackRange: 4
   attackExitRange: 6
   attackCooldown: 1.2
+  attackStateMinTime: 1
   damagePerShot: 15
   searchRadius: 4
-  searchPointCount: 4
   waitAtSearchPoint: 1
+  avoidRadius: 0.3
+  detectDistance: 0.8
+  stuckTimeLimit: 1
+  stuckMoveThreshold: 0.05
+  avoidRaySamples: 7
   isDead: 0
+  normalAnimSpeed: 1
 --- !u!54 &618492146
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -12627,11 +12657,17 @@ MonoBehaviour:
   attackRange: 4
   attackExitRange: 6
   attackCooldown: 1.2
+  attackStateMinTime: 1
   damagePerShot: 15
   searchRadius: 4
-  searchPointCount: 4
   waitAtSearchPoint: 1
+  avoidRadius: 0.3
+  detectDistance: 0.8
+  stuckTimeLimit: 1
+  stuckMoveThreshold: 0.05
+  avoidRaySamples: 7
   isDead: 0
+  normalAnimSpeed: 1
 --- !u!54 &619914917
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -13036,11 +13072,17 @@ MonoBehaviour:
   attackRange: 4
   attackExitRange: 6
   attackCooldown: 1.2
+  attackStateMinTime: 1
   damagePerShot: 15
   searchRadius: 4
-  searchPointCount: 4
   waitAtSearchPoint: 1
+  avoidRadius: 0.3
+  detectDistance: 0.8
+  stuckTimeLimit: 1
+  stuckMoveThreshold: 0.05
+  avoidRaySamples: 7
   isDead: 0
+  normalAnimSpeed: 1
 --- !u!54 &635688919
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -15705,11 +15747,17 @@ MonoBehaviour:
   attackRange: 4
   attackExitRange: 6
   attackCooldown: 1.2
+  attackStateMinTime: 1
   damagePerShot: 15
   searchRadius: 4
-  searchPointCount: 4
   waitAtSearchPoint: 1
+  avoidRadius: 0.3
+  detectDistance: 0.8
+  stuckTimeLimit: 1
+  stuckMoveThreshold: 0.05
+  avoidRaySamples: 7
   isDead: 0
+  normalAnimSpeed: 1
 --- !u!54 &773415916
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -18177,11 +18225,17 @@ MonoBehaviour:
   attackRange: 4
   attackExitRange: 6
   attackCooldown: 1.2
+  attackStateMinTime: 1
   damagePerShot: 15
   searchRadius: 4
-  searchPointCount: 4
   waitAtSearchPoint: 1
+  avoidRadius: 0.3
+  detectDistance: 0.8
+  stuckTimeLimit: 1
+  stuckMoveThreshold: 0.05
+  avoidRaySamples: 7
   isDead: 0
+  normalAnimSpeed: 1
 --- !u!54 &919954565
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -21678,11 +21732,17 @@ MonoBehaviour:
   attackRange: 4
   attackExitRange: 6
   attackCooldown: 1.2
+  attackStateMinTime: 1
   damagePerShot: 15
   searchRadius: 4
-  searchPointCount: 4
   waitAtSearchPoint: 1
+  avoidRadius: 0.3
+  detectDistance: 0.8
+  stuckTimeLimit: 1
+  stuckMoveThreshold: 0.05
+  avoidRaySamples: 7
   isDead: 0
+  normalAnimSpeed: 1
 --- !u!54 &1099854032
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -27227,11 +27287,17 @@ MonoBehaviour:
   attackRange: 4
   attackExitRange: 6
   attackCooldown: 1.2
+  attackStateMinTime: 1
   damagePerShot: 15
   searchRadius: 4
-  searchPointCount: 4
   waitAtSearchPoint: 1
+  avoidRadius: 0.3
+  detectDistance: 0.8
+  stuckTimeLimit: 1
+  stuckMoveThreshold: 0.05
+  avoidRaySamples: 7
   isDead: 0
+  normalAnimSpeed: 1
 --- !u!54 &1398287383
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -28737,11 +28803,17 @@ MonoBehaviour:
   attackRange: 4
   attackExitRange: 6
   attackCooldown: 1.2
+  attackStateMinTime: 1
   damagePerShot: 15
   searchRadius: 4
-  searchPointCount: 4
   waitAtSearchPoint: 1
+  avoidRadius: 0.3
+  detectDistance: 0.8
+  stuckTimeLimit: 1
+  stuckMoveThreshold: 0.05
+  avoidRaySamples: 7
   isDead: 0
+  normalAnimSpeed: 1
 --- !u!54 &1495231322
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -29569,11 +29641,17 @@ MonoBehaviour:
   attackRange: 4
   attackExitRange: 6
   attackCooldown: 1.2
+  attackStateMinTime: 1
   damagePerShot: 15
   searchRadius: 4
-  searchPointCount: 4
   waitAtSearchPoint: 1
+  avoidRadius: 0.3
+  detectDistance: 0.8
+  stuckTimeLimit: 1
+  stuckMoveThreshold: 0.05
+  avoidRaySamples: 7
   isDead: 0
+  normalAnimSpeed: 1
 --- !u!54 &1519302363
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -31269,11 +31347,17 @@ MonoBehaviour:
   attackRange: 4
   attackExitRange: 6
   attackCooldown: 1.2
+  attackStateMinTime: 1
   damagePerShot: 15
   searchRadius: 4
-  searchPointCount: 4
   waitAtSearchPoint: 1
+  avoidRadius: 0.3
+  detectDistance: 0.8
+  stuckTimeLimit: 1
+  stuckMoveThreshold: 0.05
+  avoidRaySamples: 7
   isDead: 0
+  normalAnimSpeed: 1
 --- !u!54 &1577873699
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -33386,11 +33470,17 @@ MonoBehaviour:
   attackRange: 4
   attackExitRange: 6
   attackCooldown: 1.2
+  attackStateMinTime: 1
   damagePerShot: 15
   searchRadius: 4
-  searchPointCount: 4
   waitAtSearchPoint: 1
+  avoidRadius: 0.3
+  detectDistance: 0.8
+  stuckTimeLimit: 1
+  stuckMoveThreshold: 0.05
+  avoidRaySamples: 7
   isDead: 0
+  normalAnimSpeed: 1
 --- !u!54 &1711861361
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -34726,11 +34816,17 @@ MonoBehaviour:
   attackRange: 4
   attackExitRange: 6
   attackCooldown: 1.2
+  attackStateMinTime: 1
   damagePerShot: 15
   searchRadius: 4
-  searchPointCount: 4
   waitAtSearchPoint: 1
+  avoidRadius: 0.3
+  detectDistance: 0.8
+  stuckTimeLimit: 1
+  stuckMoveThreshold: 0.05
+  avoidRaySamples: 7
   isDead: 0
+  normalAnimSpeed: 1
 --- !u!54 &1808491884
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -35259,11 +35355,17 @@ MonoBehaviour:
   attackRange: 4
   attackExitRange: 6
   attackCooldown: 1.2
+  attackStateMinTime: 1
   damagePerShot: 15
   searchRadius: 4
-  searchPointCount: 4
   waitAtSearchPoint: 1
+  avoidRadius: 0.3
+  detectDistance: 0.8
+  stuckTimeLimit: 1
+  stuckMoveThreshold: 0.05
+  avoidRaySamples: 7
   isDead: 0
+  normalAnimSpeed: 1
 --- !u!54 &1832346077
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -40452,6 +40554,9 @@ MonoBehaviour:
   fallDownOffset: 0.5
   waitBeforeDisappear: 0.5
   disappearDuration: 0.5
+  playerAnimator: {fileID: 2110035466}
+  attackDelay: 0.3
+  attackSpeed: 1.8
 --- !u!114 &2085197360
 MonoBehaviour:
   m_ObjectHideFlags: 0

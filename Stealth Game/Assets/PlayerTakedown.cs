@@ -1,121 +1,128 @@
-using System.Collections;
-using UnityEngine;
+using System.Collections; // Coroutines
+using UnityEngine; // Unity framework
 
-public class PlayerTakedown : MonoBehaviour
+public class PlayerTakedown : MonoBehaviour // Handles player takedown mechanic
 {
-    public float takedownRange = 2f;
-    public float fallDuration = 0.4f;
-    public float fallDownOffset = 0.5f;
-    public float waitBeforeDisappear = 0.5f;
-    public float disappearDuration = 0.5f;
+    public float    takedownRange        = 2f;   // Detection radius // Radius
+    public float    fallDuration         = 0.4f; // Seconds to fall // Duration
+    public float    fallDownOffset       = 0.5f; // Units to sink // Offset
+    public float    waitBeforeDisappear  = 0.5f; // Seconds before shrink // Wait
+    public float    disappearDuration    = 0.5f; // Seconds to shrink // Duration
+    public Animator playerAnimator;              // Player animator reference // Reference
+    public float    attackSpeed          = 3f;   // Animation multiplier // Speed multiplier
 
-    void Update()
+    void Update() // Per-frame input check
     {
-        if (Input.GetKeyDown(KeyCode.E))
+        // input // Check for input
+        if (Input.GetKeyDown(KeyCode.E)) // E key pressed
+            TryTakedownGuard(); // Attempt takedown
+    }
+
+    void TryTakedownGuard() // Attempt takedown on nearby guard
+    {
+        // scan // Scan for guards
+        Collider[] hits = Physics.OverlapSphere(transform.position, takedownRange); // Get nearby colliders
+        foreach (Collider hit in hits) // For each hit
         {
-            TryTakedownGuard();
+            if (!hit.CompareTag("Guard")) continue; // Skip non-guards
+
+            GuardAI guardAI = hit.GetComponent<GuardAI>(); // Get guard AI
+            if (guardAI != null && guardAI.isDead) return; // Already dead
+
+            // animate // Trigger attack animation
+            if (playerAnimator != null) // Has animator
+            {
+                playerAnimator.speed = attackSpeed; // Speed up animation
+                playerAnimator.SetTrigger("attack"); // Trigger attack
+                StartCoroutine(ResetSpeed()); // Schedule speed reset
+            }
+
+            // execute // Execute takedown
+            ExecuteTakedown(hit); // Perform takedown
+            break; // Only one guard
         }
     }
 
-    void TryTakedownGuard()
+    IEnumerator ResetSpeed() // Reset animation speed after delay
     {
-        Collider[] hits = Physics.OverlapSphere(transform.position, takedownRange);
-
-        foreach (Collider hit in hits)
-        {
-            if (!hit.CompareTag("Guard"))
-                continue;
-
-            GuardAI guardAI = hit.GetComponent<GuardAI>();
-            Rigidbody guardRb = hit.GetComponent<Rigidbody>();
-            CapsuleCollider guardCollider = hit.GetComponent<CapsuleCollider>();
-            Animator guardAnimator = hit.GetComponentInChildren<Animator>();
-
-            if (guardAI != null)
-            {
-                if (guardAI.isDead)
-                    return;
-
-                guardAI.isDead = true;
-
-                if (KillCounter.Instance != null)
-                    KillCounter.Instance.AddKill();
-            }
-
-            if (GuardCounterUI.Instance != null)
-            {
-                GuardCounterUI.Instance.RegisterKill();
-            }
-
-            if (guardAnimator != null)
-            {
-                guardAnimator.SetBool("isRunning", false);
-                guardAnimator.speed = 1f;
-            }
-
-            if (guardRb != null)
-            {
-                guardRb.linearVelocity = Vector3.zero;
-                guardRb.angularVelocity = Vector3.zero;
-                guardRb.isKinematic = true;
-            }
-
-            if (guardCollider != null)
-            {
-                guardCollider.enabled = false;
-            }
-
-            StartCoroutine(FallAndDisappear(hit.transform));
-            break;
-        }
+        yield return new WaitForSeconds(0.25f); // Wait 0.25 seconds
+        playerAnimator.speed = 1f; // Reset to normal
     }
 
-    IEnumerator FallAndDisappear(Transform guard)
+    void ExecuteTakedown(Collider hit) // Execute takedown on guard
     {
-        Quaternion startRotation = guard.rotation;
-        Quaternion endRotation = Quaternion.Euler(0f, guard.eulerAngles.y, 90f);
+        // get components // Cache guard components
+        GuardAI         guardAI  = hit.GetComponent<GuardAI>(); // Guard AI
+        Rigidbody       guardRb  = hit.GetComponent<Rigidbody>(); // Rigidbody
+        CapsuleCollider guardCol = hit.GetComponent<CapsuleCollider>(); // Collider
+        Animator        guardAnim = hit.GetComponentInChildren<Animator>(); // Animator
 
-        Vector3 startPosition = guard.position;
-        Vector3 endPosition = startPosition + Vector3.down * fallDownOffset;
-
-        float time = 0f;
-
-        while (time < fallDuration)
+        // kill // Mark as dead
+        if (guardAI != null) // Has AI
         {
-            time += Time.deltaTime;
-            float t = time / fallDuration;
-
-            guard.rotation = Quaternion.Slerp(startRotation, endRotation, t);
-            guard.position = Vector3.Lerp(startPosition, endPosition, t);
-
-            yield return null;
+            guardAI.isDead = true; // Set dead flag
+            KillCounter.Instance?.AddKill(); // Increment kill counter
         }
 
-        guard.rotation = endRotation;
-        guard.position = endPosition;
+        // stop anim // Stop guard animation
+        if (guardAnim != null) // Has animator
+            guardAnim.SetBool("isRunning", false); // Stop running
 
-        yield return new WaitForSeconds(waitBeforeDisappear);
-
-        Vector3 startScale = guard.localScale;
-        Vector3 endScale = Vector3.zero;
-
-        time = 0f;
-
-        while (time < disappearDuration)
+        // freeze physics // Disable physics
+        if (guardRb != null) // Has rigidbody
         {
-            time += Time.deltaTime;
-            float t = time / disappearDuration;
-            guard.localScale = Vector3.Lerp(startScale, endScale, t);
-            yield return null;
+            guardRb.linearVelocity  = Vector3.zero; // Stop movement
+            guardRb.angularVelocity = Vector3.zero; // Stop rotation
+            guardRb.isKinematic     = true; // Make kinematic
         }
 
-        guard.localScale = Vector3.zero;
-        guard.gameObject.SetActive(false);
+        // disable collision // Turn off collider
+        if (guardCol != null) // Has collider
+            guardCol.enabled = false; // Disable collider
+
+        StartCoroutine(FallAndDisappear(hit.transform)); // Start disappear animation
     }
 
-    void OnDrawGizmosSelected()
+    IEnumerator FallAndDisappear(Transform guard) // Animate guard falling and disappearing
     {
-        Gizmos.color = Color.red;
-        Gizmos.DrawWireSphere(transform.position, takedownRange);
+        // fall // Fall animation
+        Quaternion startRot = guard.rotation; // Starting rotation
+        Quaternion endRot   = Quaternion.Euler(0f, guard.eulerAngles.y, 90f); // Ending rotation
+        Vector3    startPos = guard.position; // Starting position
+        Vector3    endPos   = startPos + Vector3.down * fallDownOffset; // Ending position
+        float time = 0f; // Elapsed time
+
+        while (time < fallDuration) // While falling
+        {
+            time += Time.deltaTime; // Increment time
+            float t = time / fallDuration; // Normalized time
+            guard.rotation = Quaternion.Slerp(startRot, endRot, t); // Lerp rotation
+            guard.position = Vector3.Lerp(startPos, endPos, t); // Lerp position
+            yield return null; // Wait one frame
+        }
+        guard.rotation = endRot; // Set final rotation
+        guard.position = endPos; // Set final position
+
+        yield return new WaitForSeconds(waitBeforeDisappear); // Wait before disappearing
+
+        // shrink // Shrink animation
+        Vector3 startScale = guard.localScale; // Starting scale
+        time = 0f; // Reset time
+        while (time < disappearDuration) // While shrinking
+        {
+            time += Time.deltaTime; // Increment time
+            guard.localScale = Vector3.Lerp(startScale, Vector3.zero, time / disappearDuration); // Lerp scale
+            yield return null; // Wait one frame
+        }
+        guard.localScale = Vector3.zero; // Set to zero scale
+        guard.gameObject.SetActive(false); // Deactivate object
     }
+
+#if UNITY_EDITOR // Editor only
+    void OnDrawGizmosSelected() // Draw debug gizmos
+    {
+        Gizmos.color = Color.red; // Red color
+        Gizmos.DrawWireSphere(transform.position, takedownRange); // Draw radius
+    }
+#endif // End editor
 }

@@ -1,113 +1,96 @@
-using UnityEngine;
-using UnityEngine.UI;
-using System.Collections;
+using UnityEngine; // Unity framework
+using UnityEngine.UI; // UI components
+using System.Collections; // Coroutines
 
-public class PlayerHealth : MonoBehaviour
+public class PlayerHealth : MonoBehaviour // Manages player health
 {
-    public int maxHealth = 100;
-    public int currentHealth;
+    public int maxHealth    = 100;  // Max HP // Maximum health
+    public int currentHealth;       // Current HP // Current health
 
-    [Header("UI")]
-    public Slider healthSlider;
-    public Image healthFillImage;
+    [Header("UI")] // UI section
+    public Slider healthSlider;      // HP bar // Health slider
+    public Image  healthFillImage;   // Bar fill image // Health fill color
 
-    [Header("Colors")]
-    public Color normalHealthColor = Color.green;
-    public Color damageHealthColor = Color.red;
+    [Header("Colors")] // Colors section
+    public Color normalHealthColor = Color.green;  // Idle color // Normal green
+    public Color damageHealthColor = Color.red;    // Hit color // Damage red
 
-    [Header("Smooth Settings")]
-    public float flashToDamageDuration = 0.08f;
-    public float flashBackDuration = 0.25f;
-    public float sliderSmoothSpeed = 8f;
+    [Header("Smooth Settings")] // Smooth settings section
+    public float flashToDamageDuration = 0.08f;  // Seconds to flash red // Flash duration
+    public float flashBackDuration     = 0.25f;  // Seconds to return green // Return duration
+    public float sliderSmoothSpeed     = 8f;     // Bar lerp speed // Smoothing speed
 
-    private Coroutine flashCoroutine;
-    private float displayedHealth;
+    private Coroutine flashCoroutine;   // Running flash // Active coroutine
+    private float     displayedHealth;  // Lerped HP shown on bar // Displayed value
 
-    void Start()
+    void Start() // Initialize health
     {
-        currentHealth = maxHealth;
-        displayedHealth = currentHealth;
+        // init // Initialize
+        currentHealth   = maxHealth; // Set current to max
+        displayedHealth = currentHealth; // Set displayed to current
 
-        if (healthSlider != null)
+        if (healthSlider != null) // Has slider
         {
-            healthSlider.maxValue = maxHealth;
-            healthSlider.value = currentHealth;
+            healthSlider.maxValue = maxHealth; // Set max value
+            healthSlider.value    = currentHealth; // Set current value
         }
 
-        if (healthFillImage != null)
-        {
-            healthFillImage.color = normalHealthColor;
-        }
+        if (healthFillImage != null) // Has fill image
+            healthFillImage.color = normalHealthColor; // Set normal color
     }
 
-    void Update()
+    void Update() // Update health bar display
     {
-        if (healthSlider != null)
-        {
-            displayedHealth = Mathf.Lerp(
-                displayedHealth,
-                currentHealth,
-                sliderSmoothSpeed * Time.deltaTime
-            );
-
-            if (Mathf.Abs(displayedHealth - currentHealth) < 0.05f)
-                displayedHealth = currentHealth;
-
-            healthSlider.value = displayedHealth;
-        }
+        // smooth bar // Smooth animation
+        if (healthSlider == null) return; // No slider
+        displayedHealth = Mathf.Lerp(displayedHealth, currentHealth, sliderSmoothSpeed * Time.deltaTime); // Interpolate
+        if (Mathf.Abs(displayedHealth - currentHealth) < 0.05f) // Close enough
+            displayedHealth = currentHealth; // Snap to value
+        healthSlider.value = displayedHealth; // Update slider
     }
 
-    public void TakeDamage(int damage)
+    public void TakeDamage(int damage) // Take damage
     {
-        currentHealth -= damage;
+        // reduce // Reduce health
+        currentHealth = Mathf.Max(0, currentHealth - damage); // Subtract damage
 
-        if (currentHealth < 0)
-            currentHealth = 0;
-
-        if (healthFillImage != null)
+        // flash // Flash effect
+        if (healthFillImage != null) // Has fill image
         {
-            if (flashCoroutine != null)
-                StopCoroutine(flashCoroutine);
-
-            flashCoroutine = StartCoroutine(SmoothFlashHealthBar());
+            if (flashCoroutine != null) StopCoroutine(flashCoroutine); // Stop existing
+            flashCoroutine = StartCoroutine(SmoothFlashHealthBar()); // Start flash
         }
 
-        if (currentHealth <= 0)
-        {
-            Die();
-        }
+        // death // Death check
+        if (currentHealth <= 0) Die(); // Dead
     }
 
-    void Die()
+    void Die() // Handle death
     {
-        if (GameUIManager.Instance != null)
-            GameUIManager.Instance.ShowGameOver();
+        if (GameUIManager.Instance != null) // Has UI manager
+            GameUIManager.Instance.ShowGameOver(); // Show game over
     }
 
-    IEnumerator SmoothFlashHealthBar()
+    IEnumerator SmoothFlashHealthBar() // Animate health bar flash
     {
-        float time = 0f;
-
-        while (time < flashToDamageDuration)
+        // green → red // Flash red
+        float time = 0f; // Elapsed time
+        while (time < flashToDamageDuration) // While flashing
         {
-            time += Time.unscaledDeltaTime;
-            float t = time / flashToDamageDuration;
-            healthFillImage.color = Color.Lerp(normalHealthColor, damageHealthColor, t);
-            yield return null;
+            time += Time.unscaledDeltaTime; // Increment time
+            healthFillImage.color = Color.Lerp(normalHealthColor, damageHealthColor, time / flashToDamageDuration); // Lerp to red
+            yield return null; // Wait frame
         }
+        healthFillImage.color = damageHealthColor; // Set to red
 
-        healthFillImage.color = damageHealthColor;
-
-        time = 0f;
-
-        while (time < flashBackDuration)
+        // red → green // Return green
+        time = 0f; // Reset time
+        while (time < flashBackDuration) // While returning
         {
-            time += Time.unscaledDeltaTime;
-            float t = time / flashBackDuration;
-            healthFillImage.color = Color.Lerp(damageHealthColor, normalHealthColor, t);
-            yield return null;
+            time += Time.unscaledDeltaTime; // Increment time
+            healthFillImage.color = Color.Lerp(damageHealthColor, normalHealthColor, time / flashBackDuration); // Lerp to green
+            yield return null; // Wait frame
         }
-
-        healthFillImage.color = normalHealthColor;
+        healthFillImage.color = normalHealthColor; // Set to green
     }
 }
